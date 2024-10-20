@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Browser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #address-bar {
+            display: flex;
+            padding: 10px;
+            background-color: #f3f3f3;
+        }
+        #url {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #go-button {
+            padding: 8px 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #go-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="address-bar">
+        <input type="text" id="url" placeholder="Enter URL here..." />
+        <button id="go-button">Go</button>
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('url');
+        const goButton = document.getElementById('go-button');
+
+        // Function to load the URL
+        function loadUrl() {
+            let url = urlInput.value.trim();
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'http://' + url; // Default to http if not included
+            }
+            window.open(url, '_blank'); // Open the URL in a new tab
+        }
+
+        // Event listener for the button
+        goButton.addEventListener('click', loadUrl);
+
+        // Allow pressing "Enter" to load the URL
+        urlInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                loadUrl();
+            }
+        });
+    </script>
+
+</body>
+</html>
